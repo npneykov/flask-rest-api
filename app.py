@@ -1,11 +1,11 @@
 from flask import Flask
 from flask_smorest import Api
-from resources.item import blp as ItemBlueprint
-from resources.store import blp as StoreBlueprint
-from resources.tag import blp as TagBlueprint
 
 import models
 from db import db
+from src.item import blp as ItemBlueprint
+from src.store import blp as StoreBlueprint
+from src.tag import blp as TagBlueprint
 
 
 def create_app(db_url=None):
