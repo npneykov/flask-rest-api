@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_jwt_extended import JWTManager
 from flask_smorest import Api
 
 import models
@@ -21,8 +22,10 @@ def create_app(db_url=None):
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url or 'sqlite:///data.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['PROPAGATE_EXCEPTIONS'] = True
+    app.config['JWT_SECRET_KEY'] = 'eY95c1aZnOy549tEVlEgJkUw92VtD8jr'
     db.init_app(app)
     api = Api(app)
+    jwt = JWTManager(app)
 
     with app.app_context():
         db.create_all()
