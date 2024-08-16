@@ -7,6 +7,7 @@ from db import db
 from src.item import blp as ItemBlueprint
 from src.store import blp as StoreBlueprint
 from src.tag import blp as TagBlueprint
+from src.user import blp as UserBlueprint
 
 
 def create_app(db_url=None):
@@ -33,5 +34,6 @@ def create_app(db_url=None):
     api.register_blueprint(ItemBlueprint)
     api.register_blueprint(StoreBlueprint)
     api.register_blueprint(TagBlueprint)
+    api.register_blueprint(UserBlueprint)
 
     return app
