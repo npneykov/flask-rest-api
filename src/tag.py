@@ -15,7 +15,7 @@ class TagsInStore(MethodView):
     def get(self, store_id):
         store = StoreModel.query.get_or_404(store_id)
 
-        return store.tags.all()  # lazy="dynamic" means 'tags' is a query
+        return store.tags.all()
 
     @blp.arguments(TagSchema)
     @blp.response(201, TagSchema)
@@ -95,7 +95,7 @@ class Tag(MethodView):
         if not tag.items:
             db.session.delete(tag)
             db.session.commit()
-            return {'message': 'Tag deleted.'}
+            return {'message': 'Tag deleted.'}, 200
         abort(
             400,
             message='Could not delete tag. Make sure tag is not associated with any items, then try again.',  # noqa: E501
