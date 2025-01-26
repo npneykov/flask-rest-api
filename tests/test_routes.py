@@ -32,3 +32,25 @@ def test_put_item(client):
     client.post('/item', json={'name': 'Test Item', 'price': 10.99, 'store_id': 1})
     response = client.put('/item/1', json={'name': 'Test Item', 'price': 15.99})
     assert response.json.get('price') == 15.99
+
+
+def test_post_store(client):
+    """Check if the store is added to the database"""
+    response = client.post('/store', json={'name': 'Test Store'})
+    assert response.status_code == 201
+
+
+def test_get_all_stores(client):
+    """Check if the response is a dictionary"""
+    client.post('/store', json={'name': 'Test Store'})
+    client.post('/store', json={'name': 'Test Store2'})
+    client.post('/store', json={'name': 'Test Store3'})
+    assert isinstance(client.get('/store').json, list)
+
+
+def test_delete_store(client):
+    """Check if the store is deleted from the database"""
+    response = client.post('/store', json={'name': 'Test Store'})
+    store_id = response.json.get('id')
+    response = client.delete(f'/store/{store_id}')
+    assert response.status_code == 200
