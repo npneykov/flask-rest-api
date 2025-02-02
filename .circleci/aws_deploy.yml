@@ -9,7 +9,7 @@ jobs:
       - checkout
       - aws-cli/setup:
         profile_name: aws-s3-superuser
-      - run: aws s3 sync . s3://aws-web-scraper
+      - run: aws s3 sync . s3://aws-flask-rest-api
 
 workflows:
   aws-deploy:
